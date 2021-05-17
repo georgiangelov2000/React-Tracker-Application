@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
-import { auth } from "../../firebase";
+import { Form, Button,Container } from "react-bootstrap";
+import fire from "../../firebase";
 
 const Login = ({history}) => {
   const [email, setEmail] = useState("");
@@ -13,8 +13,7 @@ const Login = ({history}) => {
   const loginSubmitForm = (e) => {
     e.preventDefault();
 
-    auth
-    .signInWithEmailAndPassword(email, password)
+    fire.auth().signInWithEmailAndPassword(email, password)
     .then((result) =>{
       console.log('user signed in')
       history.push("/tracker")
@@ -28,7 +27,7 @@ const Login = ({history}) => {
   };
 
   return (
-    <div>
+    <Container>
       <h1>Login</h1>
       <Form onSubmit={loginSubmitForm}>
         <Form.Group controlId="formBasicEmail">
@@ -56,7 +55,7 @@ const Login = ({history}) => {
         </Button>
       </Form>
       {error ? <>{error}</> : null}
-    </div>
+    </Container>
   );
 };
 

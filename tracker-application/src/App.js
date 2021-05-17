@@ -4,6 +4,7 @@ import Navbar from './components/Navbar/NavbarComponent';
 import { Route,Switch } from 'react-router-dom';
 import Login from './components/Auth/Login';
 import Register from './components/Auth/Register';
+import Tracker from './components/Tracker/Tracker';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
      <Switch>
        <Route path="/login" component={Login} />
        <Route path="/register" component={Register} />
+       <Route path="/tracker" component={Tracker} />
      </Switch>
     </div>
   );

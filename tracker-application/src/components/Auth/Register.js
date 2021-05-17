@@ -1,6 +1,6 @@
 import React,{useState} from "react";
-import {Form,Button} from "react-bootstrap";
-import { auth } from "../../firebase";
+import {Form,Button,Container} from "react-bootstrap";
+import  fire  from "../../firebase";
 
 const Register = ({history}) => {
   const [email, setEmail] = useState("");
@@ -14,22 +14,23 @@ const Register = ({history}) => {
 
   const onSubmit=(e)=>{
     e.preventDefault();
-    auth.createUserWithEmailAndPassword(email,password)
+    fire.auth().createUserWithEmailAndPassword(email,password)
     .then((userCredentials) =>{
-      const currentUser=auth.currentUser;
+      const currentUser=fire.auth().currentUser;
       currentUser.updateProfile({
         displayName:setDisplayName(displayName)
       })
       console.log(currentUser)
+      history.push("/login")
     })
     .catch((error)=>{
       setError(error.message)
     });
-    history.push("/login")
+    history.push("/register")
   }
 
   return (
-    <div>
+    <Container>
         <h1>Register</h1>
       <Form onSubmit={onSubmit}>
         <Form.Group controlId="formBasicEmail">
@@ -58,7 +59,7 @@ const Register = ({history}) => {
         </Button>
       </Form>
       {error? <>{error}</> : null }
-    </div>
+    </Container>
   );
 };
 
