@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import {Form,Button} from "react-bootstrap";
 import { auth } from "../../firebase";
 
-const Register = () => {
+const Register = ({history}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
@@ -25,6 +25,7 @@ const Register = () => {
     .catch((error)=>{
       setError(error.message)
     });
+    history.push("/login")
   }
 
   return (

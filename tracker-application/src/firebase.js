@@ -13,7 +13,7 @@ require("firebase/firestore");
 
   firebase.initializeApp(firebaseConfig);
 
-  var db=firebase.firestore();
+  const db=firebase.firestore();
 
   export const auth=firebase.auth();
   export const firestore=firebase.firestore;
