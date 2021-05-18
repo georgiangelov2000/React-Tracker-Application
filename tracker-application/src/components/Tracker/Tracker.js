@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import fire from "../../firebase";
-import {Form,Button,Container} from "react-bootstrap";
+import {Form,Container,Button} from "react-bootstrap";
 import Transaction from "../Transaction/Transaction"
 
 class Tracker extends Component {
@@ -16,18 +16,25 @@ class Tracker extends Component {
       price: "",
       currentUID: fire.auth().currentUser.uid,
     };
+
+    this.handleTransactionName=this.handleTransactionName.bind(this);
+    this.handleTransactionType=this.handleTransactionType.bind(this);
+    this.handlePrice=this.handlePrice.bind(this);
   }
 
-  logout = () => {
-    fire.auth().signOut();
-  };
+  handleTransactionName=(e)=>{
+    this.setState({transactionName:e.target.value})
+  }
 
-  handleChange = input => e => {
-    this.setState({
-        [input]: e.target.value !=="0" ? e.target.value : ""
-    });
-}
+  handleTransactionType=(e)=>{
+    this.setState({transactionType:e.target.value})
+  }
 
+  handlePrice=(e)=>{
+    this.setState({price:e.target.value})
+  }
+  
+  
   addNewTransaction = (e) => {
     e.preventDefault();
     const { transactionName, transactionType, price, currentUID, money } = this.state;
@@ -101,20 +108,18 @@ class Tracker extends Component {
   }
 
   render() {
-    let currentUser = fire.auth().currentUser;
+    const currentUser = fire.auth().currentUser;
+    const name=currentUser.email;
+    const uid=name.uid;
     return (
       <Container>
-        <div>
-          <p>Hello: {currentUser.displayName}</p>
-          <Button variant="danger" onClick={this.logout}>Exit</Button>
-        </div>
+        <p>Hello: {name}</p>
         <div>${this.state.money}</div>
-
         <Form>
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>Transaction</Form.Label>
             <Form.Control
-              onChange={this.handleChange("transactionName")}
+              onChange={this.handleTransactionName}
               value={this.state.transactionName}
               type="text"
               name="transactionName"
@@ -126,7 +131,7 @@ class Tracker extends Component {
             <Form.Control
               value={this.state.transactionType}
               name="type"
-              onChange={this.handleChange("transactionType")}
+              onChange={this.handleTransactionType}
               as="select"
             >
               <option value="0">Type</option>
@@ -137,7 +142,7 @@ class Tracker extends Component {
           <Form.Group controlId="exampleForm.ControlInput1">
             <Form.Label>Transaction</Form.Label>
             <Form.Control
-              onChange={this.handleChange("price")}
+              onChange={this.handlePrice}
               value={this.state.price}
               type="text"
               name="price"

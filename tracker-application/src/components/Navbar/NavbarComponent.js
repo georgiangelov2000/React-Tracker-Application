@@ -1,6 +1,21 @@
 import React from "react";
-import { Link as RRNavLink } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
+import fire from "../../firebase";
+
+/*
+{fire.auth().onAuthStateChanged((user)=>{
+
+  if(user){
+    
+
+
+  }else{
+
+  }
+        
+})}
+*/
 
 const NavbarComponent = () => {
   return (
@@ -10,12 +25,21 @@ const NavbarComponent = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link to="/login"  tag={RRNavLink}>
-              Login
-            </Nav.Link>
-            <Nav.Link  to="/register" tag={RRNavLink} >
-              Register
-            </Nav.Link>
+            <LinkContainer to="/login">
+              <Nav.Link>
+                Login
+              </Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/register">
+              <Nav.Link>
+                Register
+              </Nav.Link>
+            </LinkContainer>
+            <LinkContainer to="/logout">
+              <Nav.Link>
+                Logout
+              </Nav.Link>
+            </LinkContainer>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

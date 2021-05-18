@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import {Form,Button,Container} from "react-bootstrap";
+import {Form,Button,Container,Alert} from "react-bootstrap";
 import  fire  from "../../firebase";
 
 const Register = ({history}) => {
@@ -32,7 +32,7 @@ const Register = ({history}) => {
   return (
     <Container>
         <h1>Register</h1>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} className="mb-2">
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email"
@@ -58,7 +58,9 @@ const Register = ({history}) => {
           Register
         </Button>
       </Form>
-      {error? <>{error}</> : null }
+      {error? <>
+      <Alert variant="danger">{error}</Alert>
+      </> : null }
     </Container>
   );
 };
