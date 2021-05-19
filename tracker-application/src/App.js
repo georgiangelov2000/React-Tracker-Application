@@ -1,25 +1,46 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Navbar from './components/Navbar/NavbarComponent';
-import { Redirect,Route,Switch } from 'react-router-dom';
-import Login from './components/Auth/Login';
-import Register from './components/Auth/Register';
-import Tracker from './components/Tracker/Tracker';
-import fire from './firebase';
+import React, { useEffect,useState } from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Navbar from "./components/Navbar/NavbarComponent";
+import { Redirect, Route, Switch } from "react-router-dom";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import Tracker from "./components/Tracker/Tracker";
+import fire from "./firebase";
+import UserContext from "./context/UserContext";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fire.auth().onAuthStateChanged(setUser);
+  }, []);
+
+  const authUser = {
+    isAuthenticated: Boolean(user),
+    username: user?.email,
+    id: user?.uid,
+  };
+  console.log(authUser);
+  console.log(user);
+
   return (
     <div className="App">
-     <Navbar />
-     <Switch>
-       <Route path="/login" component={Login} />
-       <Route path="/register" component={Register} />
-       <Route path="/tracker" component={Tracker} />
-       <Route path="/logout" render={()=>{
-         fire.auth().signOut();
-         return <Redirect to="/login" />
-       }} />
-     </Switch>
+      <UserContext.Provider value={authUser}>
+        <Navbar />
+        <Switch>
+          <Route path="/" exact component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/tracker" component={Tracker} />
+          <Route
+            path="/logout"
+            render={() => {
+              fire.auth().signOut();
+              return <Redirect to="/" />;
+            }}
+          />
+        </Switch>
+      </UserContext.Provider>
     </div>
   );
 }
