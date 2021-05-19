@@ -18,7 +18,7 @@ const Login = ({ history }) => {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log("user signed in");
-        history.push("/tracker");
+        history.push("/main");
       })
       .catch((err) => {
         setError(err.message);

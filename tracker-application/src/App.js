@@ -9,6 +9,9 @@ import Tracker from "./components/Tracker/Tracker";
 import fire from "./firebase";
 import UserContext from "./context/UserContext";
 
+import Main from "./components/Main/Main";
+
+
 function App() {
   const [user, setUser] = useState(null);
 
@@ -31,7 +34,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Login} />
           <Route path="/register" component={Register} />
-          <Route path="/tracker" component={Tracker} />
+          <Route path="/main" component={Main} />
           <Route
             path="/logout"
             render={() => {
