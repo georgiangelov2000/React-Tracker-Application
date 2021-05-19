@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Alert, Col, Row } from "react-bootstrap";
 import fire from "../../firebase";
+import {Link} from "react-router-dom";
 
 const Register = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -31,10 +32,10 @@ const Register = ({ history }) => {
   };
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 mb-5">
       <Row>
         <Col xs={6} className="m-auto p-5 bg-primary text-white">
-          <h1>Register</h1>
+          <h1>Register Form</h1>
           <Form onSubmit={onSubmit} className="mb-2">
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -58,9 +59,12 @@ const Register = ({ history }) => {
               />
             </Form.Group>
 
-            <Button variant="warning" type="submit">
+            <Button className="mb-2" variant="warning" type="submit">
               Register
             </Button>
+            <p>Already have account ?
+              <Link className="text-white" to="/"> Login</Link>
+            </p>
           </Form>
           {error ? (
             <>

@@ -5,10 +5,8 @@ import Navbar from "./components/Navbar/NavbarComponent";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
-import Tracker from "./components/Tracker/Tracker";
 import fire from "./firebase";
 import UserContext from "./context/UserContext";
-
 import Main from "./components/Main/Main";
 
 

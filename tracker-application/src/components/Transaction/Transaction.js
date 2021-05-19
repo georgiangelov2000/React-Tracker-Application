@@ -1,18 +1,44 @@
-const Transaction = (props) => {
-    return (
-        <li>
-            <div>{props.name}</div>
-            <div>{props.type==='deposit'?(
-                <span className="deposit">
-                    +{props.price}
-                </span>
-            ):(
-                <span className="expense">
-                    -{props.price}
-                </span>
-            )}</div>
-        </li>
-    )
-}
+import React from "react";
+import { ListGroupItem, Row, Col,Button } from "react-bootstrap";
+import {Link} from "react-router-dom";
+import fire from "../../firebase";
 
-export default Transaction
+const Transaction = (props) => {
+
+  return (
+    <ListGroupItem>
+      <Row className="align-items-center">
+        <Col>
+          <h6>{props.name}</h6>
+        </Col>
+        {props.type === "deposit" ? (
+            <>
+          <Col>
+            <p className="text-success">+ ${props.price}</p>
+          </Col>
+          <Col>
+          <Button variant="dark" onClick={deleteTransaction}>Delete</Button>
+          </Col>
+          <Col>
+          <Link>Edit</Link>
+          </Col>
+          </>
+        ) : (
+            <>
+          <Col>
+            <p className="text-danger" >- ${props.price}</p>
+          </Col>
+          <Col>
+          <Button variant="dark">Delete</Button>
+          </Col>
+          <Col>
+            <Link>Edit</Link>
+          </Col>
+          </>
+        )}
+      </Row>
+    </ListGroupItem>
+  );
+};
+
+export default Transaction;

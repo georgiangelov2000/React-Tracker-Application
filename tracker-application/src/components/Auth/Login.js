@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Alert,Row,Col,} from "react-bootstrap";
 import fire from "../../firebase";
+import {Link} from "react-router-dom";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -28,10 +29,11 @@ const Login = ({ history }) => {
   };
 
   return (
-    <Container className="mt-5">
+    <Container className="mt-5 mb-5">
+        <h5 className="text-center">Login Form</h5>
       <Row>
         <Col  xs={6} className="m-auto p-5 bg-primary text-white">
-          <h1>Login</h1>
+          <h2>Tracker-Expense-Application</h2>
           <Form onSubmit={loginSubmitForm} className="mb-2">
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -53,9 +55,12 @@ const Login = ({ history }) => {
               />
             </Form.Group>
 
-            <Button variant="warning" type="submit">
+            <Button className="mb-2" variant="warning" type="submit">
               Login
             </Button>
+            <p>Don't Have an Account ?
+              <Link to="/register" class="text-white"> Register</Link>
+            </p>
           </Form>
           {error ? <Alert variant="danger">{error}</Alert> : null}
         </Col>
