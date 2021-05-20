@@ -48,7 +48,7 @@ const NavbarComponent = () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="mr-auto">
-                <LinkContainer to="/tracker">
+                <LinkContainer to="/main">
                   <Nav.Link className="text-primary">Welcome {context.username}</Nav.Link>
                 </LinkContainer>
                 <LinkContainer to="/logout">

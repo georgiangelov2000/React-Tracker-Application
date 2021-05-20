@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import fire from "../../firebase";
+import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import {
   Form,
-  Container,
   Card,
   Row,
   Col,
   ListGroup,
   Badge,
-  Button
+  Button,
 } from "react-bootstrap";
+import moment from 'moment';
 import Transaction from "../Transaction/Transaction";
 
 class Tracker extends Component {
@@ -122,8 +123,18 @@ class Tracker extends Component {
           <Card className="p-2 mb-5 mt-2">
             <Card.Header>
               <Row>
-                <Col>Hello: {currentUser.email}</Col>
-                <Col>Ballance: {this.state.money}</Col>
+                <Col>
+                <h4 className="text-dark">
+                      Hello: {currentUser.email}
+                  </h4>
+                </Col>
+                <Col>
+                  <h6>
+                    <Badge variant="primary">
+                     Wallet Ballance: <AttachMoneyIcon /> {this.state.money}
+                    </Badge>
+                  </h6>
+                </Col>
               </Row>
             </Card.Header>
             <Form onSubmit={this.addNewTransaction}>
@@ -166,13 +177,17 @@ class Tracker extends Component {
               </Button>
             </Form>
 
-            <h3 className="mt-3">
-              <Badge variant="secondary">Latest Transaction</Badge>
-            </h3>
+            <h6 className="mt-3">
+              Latest Transaction
+            </h6>
+
+            <h6 className="text-secondary">
+              {moment().format('MMMM Do YYYY, h:mm:ss a')}
+            </h6>
 
             <ListGroup variant="flush">
               <ListGroup.Item>
-                {Object.keys(this.state.transactions).map((id) => (
+                {Object.keys(this.state.transactions).map((trans,id) => (
                   <Transaction
                     key={id}
                     type={this.state.transactions[id].type}
