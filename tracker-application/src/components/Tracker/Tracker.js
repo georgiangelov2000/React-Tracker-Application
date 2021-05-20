@@ -9,14 +9,14 @@ import {
   ListGroup,
   Badge,
   Button,
+  ListGroupItem,
 } from "react-bootstrap";
-import moment from 'moment';
+import moment from "moment";
 import Transaction from "../Transaction/Transaction";
 
 class Tracker extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       transactions: [],
       money: 0,
@@ -124,16 +124,14 @@ class Tracker extends Component {
             <Card.Header>
               <Row>
                 <Col>
-                <h4 className="text-dark">
-                      Hello: {currentUser.email}
-                  </h4>
+                  <h4 className="text-dark">Hello: {currentUser.email}</h4>
                 </Col>
                 <Col>
-                  <h6>
-                    <Badge variant="primary">
-                     Wallet Ballance: <AttachMoneyIcon /> {this.state.money}
+                  <h4>
+                    <Badge variant="primary" className="shadow">
+                      Wallet Ballance: <AttachMoneyIcon /> {this.state.money}
                     </Badge>
-                  </h6>
+                  </h4>
                 </Col>
               </Row>
             </Card.Header>
@@ -172,22 +170,20 @@ class Tracker extends Component {
                   className="text-white"
                 />
               </Form.Group>
-              <Button className="mb-2" variant="warning" type="submit">
+              <Button className="mb-2" variant="warning" type="submit" block>
                 Submit
               </Button>
             </Form>
 
-            <h6 className="mt-3">
-              Latest Transaction
-            </h6>
+            <h6 className="mt-3">Latest Transactions</h6>
 
             <h6 className="text-secondary">
-              {moment().format('MMMM Do YYYY, h:mm:ss a')}
+              {moment().format("MMMM Do YYYY, h:mm:ss a")}
             </h6>
 
             <ListGroup variant="flush">
-              <ListGroup.Item>
-                {Object.keys(this.state.transactions).map((trans,id) => (
+            <ListGroupItem>
+                {Object.keys(this.state.transactions).map((trans, id) => (
                   <Transaction
                     key={id}
                     type={this.state.transactions[id].type}
@@ -195,7 +191,7 @@ class Tracker extends Component {
                     price={this.state.transactions[id].price}
                   />
                 ))}
-              </ListGroup.Item>
+              </ListGroupItem>
             </ListGroup>
           </Card>
         </Col>
@@ -205,3 +201,98 @@ class Tracker extends Component {
 }
 
 export default Tracker;
+
+/*
+
+{Object.keys(this.state.transactions).map((trans, id) => (
+                  <ListGroupItem
+                    action
+                    variant="light"
+                    className="shadow-sm"
+                    key={id}
+                  >
+                    <Row className="align-items-center">
+                      <Col>
+                        <h6>{this.state.transactions[id].name}</h6>
+                      </Col>
+                      {this.state.transactions[id].type === "deposit" ? (
+                        <>
+                          <Col>
+                            <span>
+                              <Badge variant="success">
+                                Ballance:
+                                <AttachMoneyIcon />+
+                                {this.state.transactions[id].price}
+                              </Badge>
+                            </span>
+                          </Col>
+                          <Col>
+                            <Button
+                              variant="dark"
+                              onClick={() => this.deleteTransaction(id) }
+                            >
+                              Delete
+                            </Button>
+                          </Col>
+                          <Col>
+                            <Link>Edit</Link>
+                          </Col>
+                        </>
+                      ) : (
+                        <>
+                          <Col>
+                            <span>
+                              <Badge variant="danger">
+                                Ballance:
+                                <AttachMoneyIcon />-
+                                {this.state.transactions[id].price}
+                              </Badge>
+                            </span>
+                          </Col>
+                          <Col>
+                            <Button
+                              variant="dark"
+                              onClick={() => this.deleteTransaction(id)}
+                            >
+                              Delete
+                            </Button>
+                          </Col>
+                          <Col>
+                            <Link>Edit</Link>
+                          </Col>
+                        </>
+                      )}
+                    </Row>
+                  </ListGroupItem>
+                ))}
+                  */
+
+/*
+ deleteTransaction = (key) => {
+    if(window.confirm('Are you sure you want to delete')){
+      fire.database().ref(`Transactions/${key}`).remove(
+        err => {
+          if(err){
+            console.log(err)
+          }else {
+            console.log('successfully deleted')
+            console.log(key)
+          }
+        }
+      )
+    }
+  };
+                */
+
+
+  /*  <ListGroupItem>
+                {Object.keys(this.state.transactions).map((trans, id) => (
+                  <Transaction
+                    key={id}
+                    type={this.state.transactions[id].type}
+                    name={this.state.transactions[id].name}
+                    price={this.state.transactions[id].price}
+                  />
+                ))}
+              </ListGroupItem>
+              */

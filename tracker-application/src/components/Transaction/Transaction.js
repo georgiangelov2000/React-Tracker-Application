@@ -1,14 +1,14 @@
 import React from "react";
 import { ListGroupItem, Row, Col, Button, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 
 const Transaction = (props) => {
+
   return (
-    <ListGroupItem>
+    <ListGroupItem action variant="light" className="shadow-sm">
       <Row className="align-items-center">
-        <Col>
-          <h6>{props.name}</h6>
+        <Col >
+          <h6 >{props.name}</h6>
         </Col>
         {props.type === "deposit" ? (
           <>
@@ -18,12 +18,6 @@ const Transaction = (props) => {
                  Ballance:<AttachMoneyIcon />+{props.price}
                 </Badge>
               </span>
-            </Col>
-            <Col>
-              <Button variant="dark">Delete</Button>
-            </Col>
-            <Col>
-              <Link>Edit</Link>
             </Col>
           </>
         ) : (
@@ -35,12 +29,6 @@ const Transaction = (props) => {
                   {props.moment}
                 </Badge>
               </span>
-            </Col>
-            <Col>
-              <Button variant="dark">Delete</Button>
-            </Col>
-            <Col>
-              <Link>Edit</Link>
             </Col>
           </>
         )}
